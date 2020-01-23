@@ -2,6 +2,7 @@
 
 const yahtzeeScoreCalc = a => {
 	const callback = (x, i) => {
+		s = x.sort().join('')
 		switch (i) {
 			case 0: case 1: case 2: case 3: case 4: case 5: 
 				return x.reduce((acc, y) => (y===i+1) ? acc+y : acc, 0);
@@ -11,16 +12,17 @@ const yahtzeeScoreCalc = a => {
 				return re.test(x.sort().join('')) ? x.reduce((acc,y)=>acc+y) : 0;
 				break; 
 			case 8:
-				return (/(.)\1{1}/.test(x.sort().join('')) && /(.)\1{2}/.test(x.sort().join(''))) ? 25 : 0;
+				return (/^(.)\1{1}(?!\1)(.)\2{2}$/.test(s) 
+					|| /^(.)\1{2}(?!\1)(.)\2{1}$/.test(s)) ? 25 : 0;
 				break;
 			case 9: 
-				return (/(1234)/.test(x.join('')) || /(2345)/.test(x.join('')) || /(3456)/.test(x.join(''))) ? 30 : 0;
+				return /(1234|2345|3456)/.test(s) ? 30 : 0;
 				break;
 			case 10:
-				return (/(12345)/.test(x.sort().join('')) || /(23456)/.test(x.sort().join('')) ) ? 40 : 0
+				return /(12345|23456)/.test(s) ? 40 : 0
 				break;
 			case 11:
-				return (/(.)\1{4}/.test(x.join(''))) ? 50 : 0
+				return /(.)\1{4}/.test(s) ? 50 : 0
 				break;
 			case 12:
 				return x.reduce((acc, y)=>acc+y)
