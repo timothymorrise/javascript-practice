@@ -13,7 +13,7 @@ const incrementString = (str) => {
 	if (num.toString().length!==numLength) {
 		num = "0".repeat(numLength-num.toString().length)+num
 	}
-	return str.substr(0, str.length-numLength)+num
+	return str.substr(0, str.length-numLength)+num 
 }
 
 // The more elegant solution:
