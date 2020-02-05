@@ -10,12 +10,19 @@
 // "Wrong!" if the last two digits are different.
 
 const castOutNines = (a, b, r) => {
-	const root = n => {
-		return n && n % 10 + root(Math.floor(n / 10));
+	const rt = n => { // "rt" short for digital "r"oo"t"
+			n = ""+n
+			while(n.length>1) {
+				if (n.length===2) {
+					n = +n[0]+ +n[1]
+					n = ""+n
+				} 
+				n = ""+n.split('').map(x=> +x).reduce((acc,x)=>acc+x,0)
+		}
+		return n
 	}
-	console.log(root(a))
-	let p = root(root(a)*root(b)) // "p" for product
-	let endStr = (p===root(r)&&(a*b)===r) ? "Correct!" : 
-		(p===root(r)&&(a*b)!==r) ? "False positive!" : "Wrong!"
-	return `${root(a)},${root(b)},${root(r)},${root(p)} = ${endStr}`
+	let p = a*b // "p" for product our "true product" of a and b
+	let suffix = (rt(r)===rt(p)&&r===p)?"Correct!":
+		(rt(r)===rt(p)&&r!==p)?"False positive!":"Wrong!"
+	return `${rt(a)},${rt(b)},${rt(r)},${rt(p)} = ` + suffix
 }
