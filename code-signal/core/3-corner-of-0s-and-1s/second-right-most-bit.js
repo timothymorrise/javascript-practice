@@ -4,3 +4,7 @@
 const secondRightmostZeroBit = n => {
     return (~((~n&(n+1))|n))&-(~((~n&(n+1))|n))
   }
+
+  // NOTES
+  // the SEXIEST version
+  // return ~(n |= -~n) & -~n;
