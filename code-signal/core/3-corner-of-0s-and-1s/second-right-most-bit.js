@@ -6,5 +6,6 @@ const secondRightmostZeroBit = n => {
   }
 
   // NOTES
+  // this entails a lot of bitwise operators, a good crash course
   // the SEXIEST version
   // return ~(n |= -~n) & -~n;
