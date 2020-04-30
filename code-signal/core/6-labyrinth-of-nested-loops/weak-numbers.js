@@ -1,10 +1,8 @@
-
-
 const getDivisorsCount = n => {
     var c = 1, //count
         f = 2; // factors
     while (f * f <= n) {
-        if (n % f === 0) {   // `factor` is a prime factor of `n`, determine  exponent:
+        if (n % f === 0) {   // iz factors, lets grab an e:
             let e = 0;
             do {
                 n /= f;
@@ -19,11 +17,16 @@ const getDivisorsCount = n => {
 }
 
 const weakNumbers = n => {
-    let c = 0, // count
-        w = 0 // weakness
-    for (let i=0;i<n;i++) {
-        
+    let a = [],
+        w = [],
+        x = 0;
+    for (let i=1;i<n+1;i++) a.push(getDivisorsCount(i))
+    for (i=0; i<n; i++) {
+        x = a.slice(0,i).filter(x=>x>a[i]).length
+        if (x>0) w.push(x)
     }
+    let max = Math.max(...w)
+    return max>0 ? [max, w.filter(x=>x===max).length] : [0, a.length]
 }
 
 // NOTES
