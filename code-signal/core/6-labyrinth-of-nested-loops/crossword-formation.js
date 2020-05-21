@@ -10,7 +10,9 @@ const getLetterIntersections = (skip, s1, s2) => {
     return a
 }
 
-    // compare the chosen word to it's compatriats
+
+const crosswordFormation = (w) => {
+// compare the chosen word to it's compatriats
     for (let i=0;i<4;i++) { 
         let first = w[i] // define first word     
         let a = sans(w,i) // filter array
@@ -21,16 +23,23 @@ const getLetterIntersections = (skip, s1, s2) => {
             let b = sans(a, j) // filter out second word
             let third = b[0]
             for ( let k=0;k<firstInstersections.length;k++) {          // loop through the intersection array
-                let secondIntersections = getLetterIntersections(firstInstersections[k][2],second,third) // get intersections of second and third
-                
+                let secondIntersections = getLetterIntersections(firstInstersections[k][2],second,third).filter(x=> {
+                    return (x[1]-firstInstersections[k][2])>1
+                }) // get intersections of second and third while filtering out undesirable permutations
+                for (let l=0;l<secondIntersections.length;l++) {
+                    let fourth = b[1];
+                    let thirdIntersections = getLetterIntersections(secondIntersections[l][2], third, fourth).filter(x=> {
+                        return x[1]-secondIntersections[l][2]>1
+                    }) // get intersections of third and fourth while filtering out undesirable permutations
+                    for (let m=0;m<thirdIntersections.length;m++) {
+                        console.log(firstInstersections[k],secondIntersections[l], thirdIntersections[m],
+                        first, second, third, fourth)
+                        
+                    }
+                }
             }
-
                 // compare now against the fourth word matching the distances between indexes to make sure this work
-
             // compare again but swap the third and four words from last time
-        }
-        
-       
+        }     
     }
 }
-
