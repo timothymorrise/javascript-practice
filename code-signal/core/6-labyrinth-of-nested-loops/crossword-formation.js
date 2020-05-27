@@ -12,6 +12,7 @@ const getLetterIntersections = (skip, s1, s2) => {
 
 
 const crosswordFormation = (w) => {
+    let count = 0
 // compare the chosen word to it's compatriats
     for (let i=0;i<4;i++) { 
         let first = w[i] // define first word     
@@ -32,14 +33,28 @@ const crosswordFormation = (w) => {
                         return x[1]-secondIntersections[l][2]>1
                     }) // get intersections of third and fourth while filtering out undesirable permutations
                     for (let m=0;m<thirdIntersections.length;m++) {
-                        console.log(firstInstersections[k],secondIntersections[l], thirdIntersections[m],
+                            console.log(firstInstersections[k],secondIntersections[l], thirdIntersections[m],
                         first, second, third, fourth)
-                        
+                            console.log(secondIntersections[l][1], firstInstersections[k][2])
+                            let differenceX = secondIntersections[l][1]-firstInstersections[k][2]
+                            let differenceY = thirdIntersections[m][1]-secondIntersections[l][2]
+                            if(first[firstInstersections[k][1]+differenceY]
+                                ===
+                                third[thirdIntersections[m][1]-differenceX]
+                                ){
+                            console.log("we got one")
+                            count++
+                            }
                     }
                 }
             }
+
                 // compare now against the fourth word matching the distances between indexes to make sure this work
+
             // compare again but swap the third and four words from last time
-        }     
+        }
+        
+       
     }
+    return count
 }
