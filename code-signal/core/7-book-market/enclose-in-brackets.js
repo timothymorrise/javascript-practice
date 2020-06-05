@@ -1,0 +1,1 @@
+const encloseInBrackets = s => "(" + s + ")"
