@@ -26,38 +26,33 @@ const example1 = [
 // on  character: █
 // off character: ░
 
-generateNeighbors = (a, l, x, y) => {
+generateNeighbors = (a, x, y, xL, yL) => {
 	let output = []
 	// row above
 	if (y>0) {
-		if (x > 0 && x<(l-1)) output.push(...a.slice[y-1](x-1,x+2))
-		else if (x===0) output.push(....a.slice[y-1](x, x+2))
-		else if (x===l-1) output.push(....a.slice[y-1](x-1, x+1))
+		if (x > 0 && x<(xL-1)) output.push(...a[y-1].slice(x-1,x+2))
+		else if (x===0) output.push(...a[y-1].slice(x, x+2))
+		else if (x===xL-1) output.push(...a[y-1].slice(x-1, x+1))
 	}
-	
-	
- 	if 
+	// front and back
+	if (x>0) output.push(a[y][x-1])
+	if (x<(xL-1)) output.push(a[y][x+1])
+	// bottom row
+	if (y<yL-1) {
+		if (x > 0 && x<(xL-1)) output.push(...a[y+1].slice(x-1,x+2))
+		else if (x===0) output.push(...a[y+1].slice(x, x+2))
+		else if (x===xL-1) output.push(...a[y+1].slice(x-1, x+1))
+	}
+	return output.filter(x=> x===1)
 }
-// on  character: █
-// off character: ░
 
-generateNeighbors = (a, x, y, xL, yL) => {
-	let output = []
-	same row
-	if (x > 0 && x<(xL-1)) output.push(...[a[y][x-1], a[y][x+1]])
-	else if (x===0) output.push()
-	else if (x===xL-1) output.push(....a.slice[y](x-1, x+1))
-	if (y>0) {
-		if (x > 0 && x<(xL-1)) output.push(...a.slice[y-1](x-1,x+2))
-		else if (x===0) output.push(....a.slice[y-1](x, x+2))
-		else if (x===xL-1) output.push(....a.slice[y-1](x-1, x+1))
-	} 
-	if (y<)
-		if (x > 0 && x<(xL-1)) output.push(...a.slice[y-1](x-1,x+2))
-		else if (x===0) output.push(....a.slice[y-1](x, x+2))
-		else if (x===xL-1) output.push(....a.slice[y-1](x-1, x+1))
-	}
- }
 const gameOfLife = a => {
-	
+	let s = ""
+	for (let i=0;i<a.length;i++) {
+		for (let j=0;j<a[i].length; j++) {
+			let n = generateNeighbors(a, j, i, a[i].length, a.length).length
+			if (n < 2 || n >3) s+= "░"
+			if (n === 2 || n === 3) s+="█"
+		}
+	}
 }
