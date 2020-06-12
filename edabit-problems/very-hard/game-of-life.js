@@ -26,6 +26,9 @@ const example1 = [
 // on  character: █
 // off character: ░
 
+// on  character: █
+// off character: ░
+
 generateNeighbors = (a, x, y, xL, yL) => {
 	let output = []
 	// row above
@@ -51,8 +54,15 @@ const gameOfLife = a => {
 	for (let i=0;i<a.length;i++) {
 		for (let j=0;j<a[i].length; j++) {
 			let n = generateNeighbors(a, j, i, a[i].length, a.length).length
-			if (n < 2 || n >3) s+= "░"
-			if (n === 2 || n === 3) s+="█"
+			if (a[i][j]===1) {
+				console.log(i,j, s===undefined)
+				s+= (n === 2 || n === 3)?"█":"░"
+			} else if (a[i][j]===0) {
+				s+= n===3?"█":"░"
+			}
+			
 		}
+		if (i<a.length-1) s+="\n"
 	}
+	return s
 }
