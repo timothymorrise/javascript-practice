@@ -11,5 +11,5 @@ const allPairs = (a, n) => {
         }
         hash[""+a[i]] = a[i]
     }
-    return output
+		return output.map(x=>x.sort()).sort((a,b)=>a[0]-b[0])
 }
